@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApi.Extensions;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -12,6 +12,12 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Register(RegisterDevice registerDevice)
         {
+            var errors = registerDevice.Validate();
+            if (errors.Count > 0)
+            {
+                return StatusCode(400, errors);
+            }
+
             return StatusCode(200);
         }
     }
