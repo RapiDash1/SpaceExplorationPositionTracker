@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{663912EF-FAC6-46FE-9C21-BE0A0E36EE41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{663912EF-FAC6-46FE-9C21-BE0A0E36EE41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Tests", "WebApi.Tests\WebApi.Tests.csproj", "{B6149C00-E7FB-4675-8640-8461B9E30ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Tests", "WebApi.Tests\WebApi.Tests.csproj", "{B6149C00-E7FB-4675-8640-8461B9E30ADA}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{EA159410-7EF5-4E3D-877F-19BF5F29E648}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{B6149C00-E7FB-4675-8640-8461B9E30ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6149C00-E7FB-4675-8640-8461B9E30ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6149C00-E7FB-4675-8640-8461B9E30ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA159410-7EF5-4E3D-877F-19BF5F29E648}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
