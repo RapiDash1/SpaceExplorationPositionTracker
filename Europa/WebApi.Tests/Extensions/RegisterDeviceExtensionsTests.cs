@@ -6,7 +6,7 @@ using WebApi.Models;
 namespace WebApi.Tests.Extensions
 {
     [TestFixture]
-    public class RegisterDeviceExtensionsTests
+    public class RegisterDeviceExtensionsTests : WebApiTests
     {
         [Test]
         public void DontReturnError_When_RegisterDeviceObjectIsValid()

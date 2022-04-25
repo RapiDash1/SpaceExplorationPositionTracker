@@ -1,19 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebApi.Controllers;
 using WebApi.Models;
 
 namespace WebApi.Tests.Controllers
 {
     [TestFixture]
-    public class RegisterDeviceControllerTests
+    public class RegisterDeviceControllerTests : WebApiTests
     {
         [Test]
-        public void ReturnSuccess_When_ValidRegistrationDataIsReceived()
+        public async Task ReturnSuccess_When_ValidRegistrationDataIsReceived()
         {
             // Arrange
-            var controller = new RegisterDeviceController();
+            var serviceProvider = InjectionModule.Register(new ServiceCollection());
+            var controller = serviceProvider.GetRequiredService<RegisterDeviceController>();
             var registerDevice = new RegisterDevice { 
                 Name = "Test Name",
                 Description = "Test Description",
@@ -22,7 +25,7 @@ namespace WebApi.Tests.Controllers
             };
 
             // Act
-            var response = controller.Register(registerDevice);
+            var response = await controller.Register(registerDevice);
 
             // Assert
             var statusCodeResult = (StatusCodeResult)response;
@@ -30,10 +33,11 @@ namespace WebApi.Tests.Controllers
         }
 
         [Test]
-        public void ReturnError_When_InvalidRegistrationDataIsReceived()
+        public async Task ReturnError_When_InvalidRegistrationDataIsReceived()
         {
             // Arrange
-            var controller = new RegisterDeviceController();
+            var serviceProvider = InjectionModule.Register(new ServiceCollection());
+            var controller = serviceProvider.GetRequiredService<RegisterDeviceController>();
             var registerDevice = new RegisterDevice
             {
                 Owner = "Test Owner",
@@ -41,7 +45,7 @@ namespace WebApi.Tests.Controllers
             };
 
             // Act
-            var response = controller.Register(registerDevice);
+            var response = await controller.Register(registerDevice);
 
             // Assert
             var objectResult = (ObjectResult)response;
