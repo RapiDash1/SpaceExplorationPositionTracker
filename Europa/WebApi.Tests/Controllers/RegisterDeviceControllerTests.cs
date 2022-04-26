@@ -28,8 +28,12 @@ namespace WebApi.Tests.Controllers
             var response = await controller.Register(registerDevice);
 
             // Assert
-            var statusCodeResult = (StatusCodeResult)response;
+            var statusCodeResult = (ObjectResult)response;
             Assert.That(statusCodeResult.StatusCode, Is.EqualTo(200));
+            Assert.That(statusCodeResult.Value, Is.Not.Null);
+            Assert.That(statusCodeResult.Value, Is.TypeOf<RegisterDeviceResponse>());
+            var registerDeviceResponse = statusCodeResult.Value as RegisterDeviceResponse;
+            Assert.That(registerDeviceResponse?.DeviceKey, Is.Not.Null);
         }
 
         [Test]

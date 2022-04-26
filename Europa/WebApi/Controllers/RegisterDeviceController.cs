@@ -26,9 +26,9 @@ namespace WebApi.Controllers
                 return StatusCode(400, errors);
             }
 
-            await accessor.RegisterNewDevice(registerDevice);
+            var guid = await accessor.RegisterNewDevice(registerDevice);
 
-            return StatusCode(200);
+            return StatusCode(200, new RegisterDeviceResponse { DeviceKey = guid });
         }
     }
 }

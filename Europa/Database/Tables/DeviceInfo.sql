@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[DeviceInfo]
 (
     [Id] BIGINT NOT NULL IDENTITY(1,1),
+    [DeviceKey] UNIQUEIDENTIFIER,
     [Name] VARCHAR(300) UNIQUE NOT NULL, 
     [Description] VARCHAR(MAX) NOT NULL, 
     [Owner] VARCHAR(100) NULL, 

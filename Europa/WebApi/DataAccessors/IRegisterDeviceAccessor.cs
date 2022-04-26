@@ -4,6 +4,6 @@ namespace WebApi.DataAccessors
 {
     public interface IRegisterDeviceAccessor
     {
-        Task RegisterNewDevice(RegisterDevice registerDevice);
+        Task<Guid> RegisterNewDevice(RegisterDevice registerDevice);
     }
 }
