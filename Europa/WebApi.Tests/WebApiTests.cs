@@ -19,7 +19,7 @@ namespace WebApi.Tests
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (var cmd = new SqlCommand("EXEC sp_MSForEachTable 'DELETE FROM ?'", sqlConnection))
+                using (var cmd = new SqlCommand("EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'; EXEC sp_MSForEachTable 'DELETE ?'; EXEC sp_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';", sqlConnection))
                 {
                     sqlConnection.Open();
                     await cmd.ExecuteNonQueryAsync();
