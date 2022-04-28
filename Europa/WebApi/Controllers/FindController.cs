@@ -16,7 +16,7 @@ namespace WebApi.Controllers
             this.findAccessor = findAccessor;  
         }
 
-        [Route("/nearestdevice")]
+        [Route("/nearestactivedevice")]
         [HttpPost]
         public async Task<IActionResult> FindNearestActiveDevice(Position position)
         {
