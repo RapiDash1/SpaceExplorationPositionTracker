@@ -52,6 +52,7 @@ namespace WebApi.Tests.Controllers
                     var actualGuid = await cmd.ExecuteScalarAsync();
                     Assert.That(actualGuid, Is.Not.Null);
                     Assert.That((Guid)actualGuid!, Is.EqualTo(guid));
+                    sqlConnection.Close();
                 }
             }
         }

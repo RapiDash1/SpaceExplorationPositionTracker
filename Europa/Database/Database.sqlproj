@@ -64,5 +64,6 @@
     <Build Include="Stored Procedures\RegisterNewDevice.sql" />
     <Build Include="Tables\PositionUpdate.sql" />
     <Build Include="Stored Procedures\AddPositionUpdate.sql" />
+    <Build Include="Stored Procedures\FindNearestActiveDevice.sql" />
   </ItemGroup>
 </Project>

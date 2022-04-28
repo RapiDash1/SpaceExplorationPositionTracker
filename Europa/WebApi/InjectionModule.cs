@@ -8,12 +8,14 @@ namespace WebApi
         public static IServiceProvider Register(IServiceCollection services)
         {
             // Accessors
-            services.AddSingleton<IRegisterDeviceAccessor, RegisterDeviceAccessor>();
+            services.AddSingleton<IFindAccessor, FindAccessor>();
             services.AddSingleton<IPositionUpdateAccessor, PositionUpdateAccessor>();
+            services.AddSingleton<IRegisterDeviceAccessor, RegisterDeviceAccessor>();
 
             // Controllers
             services.AddSingleton<RegisterDeviceController>();
             services.AddSingleton<PositionUpdateController>();
+            services.AddSingleton<FindController>();
 
             return services.BuildServiceProvider();
         }
