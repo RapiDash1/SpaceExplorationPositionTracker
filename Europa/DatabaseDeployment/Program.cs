@@ -1,0 +1,3 @@
+﻿using DatabaseDeployment;
+
+Deployer.Deploy();
