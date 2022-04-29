@@ -26,16 +26,7 @@ namespace WebApi.Tests.Controllers
                 Longitude = 123.456789m,
                 DateTime = new DateTimeOffset(2022, 04, 27, 1, 2, 3, TimeSpan.Zero)
             };
-
-            using (var sqlConnection = new SqlConnection(ConnectionString))
-            {
-                using (var cmd = new SqlCommand($"INSERT INTO DeviceInfo VALUES ('{guid}', 'Test Name', 'Test Description', 'Test Owner', 200)", sqlConnection))
-                {
-                    sqlConnection.Open();
-                    await cmd.ExecuteNonQueryAsync();
-                    sqlConnection.Close();
-                }
-            }
+            await AddDeviceInfo(guid, "Test Name", "Test Description", "Test Owner", 200);
 
             // Act
             var response = await controller.PositionUpdate(positionUpdate);
