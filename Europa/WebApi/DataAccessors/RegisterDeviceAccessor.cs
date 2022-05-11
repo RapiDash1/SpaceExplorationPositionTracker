@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Dapper;
+using System.Data;
 using System.Data.SqlClient;
 using WebApi.Models;
 
@@ -12,22 +13,23 @@ namespace WebApi.DataAccessors
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (var cmd = new SqlCommand("RegisterNewDevice", sqlConnection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    var deviceKey = Guid.NewGuid();
-                    cmd.Parameters.AddWithValue("@name", registerDevice.Name);
-                    cmd.Parameters.AddWithValue("@deviceKey", deviceKey);
-                    cmd.Parameters.AddWithValue("@description", registerDevice.Description);
-                    cmd.Parameters.AddWithValue("@owner", registerDevice.Owner);
-                    cmd.Parameters.AddWithValue("@weight", registerDevice.Weight);
+                var deviceKey = Guid.NewGuid();
 
-                    sqlConnection.Open();
-                    await cmd.ExecuteNonQueryAsync();
-                    sqlConnection.Close();
+                sqlConnection.Open();
+                await sqlConnection.ExecuteAsync(
+                    "RegisterNewDevice",
+                    new
+                    {
+                        name = registerDevice.Name,
+                        description = registerDevice.Description,
+                        deviceKey = deviceKey,
+                        owner = registerDevice.Owner,
+                        weight = registerDevice.Weight
+                    },
+                    commandType: CommandType.StoredProcedure);
+                sqlConnection.Close();
 
-                    return deviceKey;
-                }
+                return deviceKey;
             }
         }
     }

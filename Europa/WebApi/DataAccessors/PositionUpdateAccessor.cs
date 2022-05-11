@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Dapper;
+using System.Data;
 using System.Data.SqlClient;
 using WebApi.Models;
 
@@ -12,18 +13,18 @@ namespace WebApi.DataAccessors
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (var cmd = new SqlCommand("AddPositionUpdate", sqlConnection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@deviceKey", positionUpdate.DeviceKey);
-                    cmd.Parameters.AddWithValue("@latitude", positionUpdate.Latitude);
-                    cmd.Parameters.AddWithValue("@longitude", positionUpdate.Longitude);
-                    cmd.Parameters.AddWithValue("@dateTime", positionUpdate.DateTime);
-
-                    sqlConnection.Open();
-                    await cmd.ExecuteNonQueryAsync();
-                    sqlConnection.Close();
-                }
+                sqlConnection.Open();
+                await sqlConnection.ExecuteAsync(
+                    "AddPositionUpdate", 
+                    new 
+                    { 
+                        deviceKey = positionUpdate.DeviceKey, 
+                        latitude = positionUpdate.Latitude, 
+                        longitude = positionUpdate.Longitude, 
+                        dateTime = positionUpdate.DateTime 
+                    }, 
+                    commandType: CommandType.StoredProcedure);
+                sqlConnection.Close();
             }
         }
     }

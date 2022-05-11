@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Dapper;
+using System.Data;
 using System.Data.SqlClient;
 using WebApi.Models;
 
@@ -12,36 +13,11 @@ namespace WebApi.DataAccessors
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (var cmd = new SqlCommand("FindNearestActiveDevice", sqlConnection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@lat", position.Latitude);
-                    cmd.Parameters.AddWithValue("@lon", position.Longitude);
-
-                    sqlConnection.Open();
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        var latitude = reader.GetDecimal(1);
-                        var longitude = reader.GetDecimal(2);
-                        var dateTime = reader.GetDateTimeOffset(3);
-                        var distance = reader.GetDouble(4);
-
-                        return new NearestPosition
-                        {
-                            Position = new Position
-                            {
-                                Latitude = latitude,
-                                Longitude = longitude
-                            },
-                            Distance = distance,
-                            DateTime = dateTime
-                        };
-                    }
-                    sqlConnection.Close();
-                }
+                sqlConnection.Open();
+                var nearestPosition = await sqlConnection.QuerySingleAsync<NearestPosition>("FindNearestActiveDevice", new { lat = position.Latitude, lon = position.Longitude }, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+                sqlConnection.Close();
+                return nearestPosition;
             }
-            return new NearestPosition();
         }
     }
 }

@@ -31,10 +31,9 @@ namespace WebApi.Tests.Controllers
             // Assert
             var nearestPosition = ((ObjectResult)response).Value as NearestPosition;
             Assert.IsNotNull(nearestPosition);
-            Assert.IsNotNull(nearestPosition!.Position);
-            Assert.That(nearestPosition.Position!.Latitude, Is.EqualTo(10));
-            Assert.That(nearestPosition.Position!.Longitude, Is.EqualTo(110));
-            Assert.That(nearestPosition.Distance, Is.EqualTo(2427.12956068571));
+            Assert.That(nearestPosition!.Latitude, Is.EqualTo(10));
+            Assert.That(nearestPosition!.Longitude, Is.EqualTo(110));
+            Assert.That(nearestPosition!.Distance, Is.EqualTo(2427.12956068571));
         }
 
 
@@ -60,9 +59,8 @@ namespace WebApi.Tests.Controllers
             // Assert
             var nearestPosition = ((ObjectResult)response).Value as NearestPosition;
             Assert.IsNotNull(nearestPosition);
-            Assert.IsNotNull(nearestPosition!.Position);
-            Assert.That(nearestPosition.Position!.Latitude, Is.EqualTo(10));
-            Assert.That(nearestPosition.Position!.Longitude, Is.EqualTo(110));
+            Assert.That(nearestPosition!.Latitude, Is.EqualTo(10));
+            Assert.That(nearestPosition!.Longitude, Is.EqualTo(110));
             Assert.That(nearestPosition.Distance, Is.EqualTo(2189.7730536778527));
         }
     }
