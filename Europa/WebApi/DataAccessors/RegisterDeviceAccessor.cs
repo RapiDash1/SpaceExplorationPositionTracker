@@ -26,7 +26,7 @@ namespace WebApi.DataAccessors
                         owner = registerDevice.Owner,
                         weight = registerDevice.Weight
                     },
-                    commandType: CommandType.StoredProcedure);
+                    commandType: CommandType.StoredProcedure).ConfigureAwait(false);
                 sqlConnection.Close();
 
                 return deviceKey;

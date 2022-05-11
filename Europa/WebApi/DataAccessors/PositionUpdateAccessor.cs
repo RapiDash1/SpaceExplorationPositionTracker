@@ -23,7 +23,7 @@ namespace WebApi.DataAccessors
                         longitude = positionUpdate.Longitude, 
                         dateTime = positionUpdate.DateTime 
                     }, 
-                    commandType: CommandType.StoredProcedure);
+                    commandType: CommandType.StoredProcedure).ConfigureAwait(false);
                 sqlConnection.Close();
             }
         }
