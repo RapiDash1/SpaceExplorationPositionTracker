@@ -6,18 +6,23 @@ using WebApi.Models;
 namespace WebApi.Tests.Extensions
 {
     [TestFixture]
-    public class RegisterDeviceExtensionsTests : WebApiTests
+    public class DeviceExtensionsTests
     {
         [Test]
         public void DontReturnError_When_RegisterDeviceObjectIsValid()
         {
             // Arrange
-            var registerDevice = new RegisterDevice
+            var registerDevice = new Device
             {
                 Name = "Test Name",
                 Description = "Test Description",
                 Owner = "Test Owner",
-                Weight = 10
+                Weight = 10,
+                Height = 1,
+                Width = 1,
+                Depth = 1,
+                IsActive = true,
+                IsMobile = true
             };
 
             // Act
@@ -28,7 +33,7 @@ namespace WebApi.Tests.Extensions
         }
 
         [TestCaseSource(nameof(RegisterDeviceData))]
-        public void ReturnErrors_When_RegisterDeviceObjectIsValid(RegisterDevice registerDevice, IReadOnlyCollection<string> expectedErrors)
+        public void ReturnErrors_When_RegisterDeviceObjectIsValid(Device registerDevice, IReadOnlyCollection<string> expectedErrors)
         {
             // Act
             var errors = registerDevice.Validate();
@@ -40,34 +45,55 @@ namespace WebApi.Tests.Extensions
         static TestCaseData[] RegisterDeviceData =
         {
             new TestCaseData(
-                new RegisterDevice 
+                new Device 
                 { 
                     Description = "Test Description", 
                     Owner = "Test Owner", 
-                    Weight = 10 
+                    Weight = 10,
+                    Height = 1,
+                    Width = 1,
+                    Depth = 1
                 }, 
                 new List<string> { 
                     "Name cannot be Null or Empty"
                 }),
             new TestCaseData(
-                new RegisterDevice 
+                new Device 
                 { 
                     Name = "Test Name", 
                     Owner = "Test Owner", 
-                    Weight = 10 
+                    Weight = 10,
+                    Height = 1,
+                    Width = 1,
+                    Depth = 1
                 },
                 new List<string> { 
                     "Description cannot be Null or Empty"
                 }),
             new TestCaseData(
-                new RegisterDevice 
+                new Device 
                 {
                     Owner = "Test Owner", 
-                    Weight = 10 
+                    Weight = 10,
+                    Height = 1,
+                    Width = 1,
+                    Depth = 1
                 },
                 new List<string> { 
                     "Name cannot be Null or Empty", 
                     "Description cannot be Null or Empty" 
+                }),
+
+            new TestCaseData(
+                new Device
+                {
+                    Name = "Test Name",
+                    Description = "Test Description",
+                    Owner = "Test Owner",
+                    Weight = 10,
+                },
+                new List<string> {
+                    "Device dimensions(Height, Width, Depth) cannot be 0"
                 })
         };
     }

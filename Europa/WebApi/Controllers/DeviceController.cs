@@ -7,18 +7,18 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegisterDeviceController : ControllerBase
+    public class DeviceController : ControllerBase
     {
-        public IRegisterDeviceAccessor accessor { get; set; }
+        public IDeviceAccessor accessor { get; set; }
 
-        public RegisterDeviceController(IRegisterDeviceAccessor accessor)
+        public DeviceController(IDeviceAccessor accessor)
         {
             this.accessor = accessor;
         }
 
         [Route("/register")]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDevice registerDevice)
+        public async Task<IActionResult> Register(Device registerDevice)
         {
             var errors = registerDevice.Validate();
             if (errors.Count > 0)

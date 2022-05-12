@@ -2,9 +2,9 @@
 
 namespace WebApi.Extensions
 {
-    public static class RegisterDeviceExtensions
+    public static class DeviceExtensions
     {
-        public static IReadOnlyCollection<string> Validate(this RegisterDevice registerDevice)
+        public static IReadOnlyCollection<string> Validate(this Device registerDevice)
         {
             var errors = new List<string>();
 
@@ -16,6 +16,11 @@ namespace WebApi.Extensions
             if (string.IsNullOrEmpty(registerDevice.Description))
             {
                 errors.Add("Description cannot be Null or Empty");
+            }
+
+            if (registerDevice.Height  * registerDevice.Width * registerDevice.Depth == 0)
+            {
+                errors.Add("Device dimensions(Height, Width, Depth) cannot be 0");
             }
 
             return errors;

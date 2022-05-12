@@ -5,11 +5,11 @@ using WebApi.Models;
 
 namespace WebApi.DataAccessors
 {
-    public class RegisterDeviceAccessor : IRegisterDeviceAccessor
+    public class DeviceAccessor : IDeviceAccessor
     {
         string ConnectionString { get; } = "Server=localhost;Database=SpaceExplorationPositionTracker;Trusted_Connection=True;";
 
-        public async Task<Guid> RegisterNewDevice(RegisterDevice registerDevice)
+        public async Task<Guid> RegisterNewDevice(Device registerDevice)
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {

@@ -10,10 +10,10 @@ namespace WebApi
             // Accessors
             services.AddSingleton<IFindAccessor, FindAccessor>();
             services.AddSingleton<IPositionUpdateAccessor, PositionUpdateAccessor>();
-            services.AddSingleton<IRegisterDeviceAccessor, RegisterDeviceAccessor>();
+            services.AddSingleton<IDeviceAccessor, DeviceAccessor>();
 
             // Controllers
-            services.AddSingleton<RegisterDeviceController>();
+            services.AddSingleton<DeviceController>();
             services.AddSingleton<PositionUpdateController>();
             services.AddSingleton<FindController>();
 

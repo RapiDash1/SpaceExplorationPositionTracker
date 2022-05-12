@@ -9,19 +9,22 @@ using WebApi.Models;
 namespace WebApi.Tests.Controllers
 {
     [TestFixture]
-    public class RegisterDeviceControllerTests : WebApiTests
+    public class DeviceControllerTests : WebApiTests
     {
         [Test]
         public async Task ReturnSuccess_When_ValidRegistrationDataIsReceived()
         {
             // Arrange
             var serviceProvider = InjectionModule.Register(new ServiceCollection());
-            var controller = serviceProvider.GetRequiredService<RegisterDeviceController>();
-            var registerDevice = new RegisterDevice { 
+            var controller = serviceProvider.GetRequiredService<DeviceController>();
+            var registerDevice = new Device { 
                 Name = "Test Name",
                 Description = "Test Description",
                 Owner = "Test Owner",
-                Weight = 10
+                Weight = 10,
+                Height = 1,
+                Width = 1,
+                Depth = 1
             };
 
             // Act
@@ -41,8 +44,8 @@ namespace WebApi.Tests.Controllers
         {
             // Arrange
             var serviceProvider = InjectionModule.Register(new ServiceCollection());
-            var controller = serviceProvider.GetRequiredService<RegisterDeviceController>();
-            var registerDevice = new RegisterDevice
+            var controller = serviceProvider.GetRequiredService<DeviceController>();
+            var registerDevice = new Device
             {
                 Owner = "Test Owner",
                 Weight = 10
@@ -54,7 +57,7 @@ namespace WebApi.Tests.Controllers
             // Assert
             var objectResult = (ObjectResult)response;
             Assert.That(objectResult.StatusCode, Is.EqualTo(400));
-            Assert.That(objectResult.Value, Is.EqualTo(new List<string> { "Name cannot be Null or Empty", "Description cannot be Null or Empty" }));
+            Assert.That(objectResult.Value, Is.EqualTo(new List<string> { "Name cannot be Null or Empty", "Description cannot be Null or Empty", "Device dimensions(Height, Width, Depth) cannot be 0" }));
         }
     }
 }
