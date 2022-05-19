@@ -18,6 +18,7 @@ namespace WebApi.Tests.Controllers
             var serviceProvider = InjectionModule.Register(new ServiceCollection());
             var controller = serviceProvider.GetRequiredService<FindController>();
             var guid = Guid.NewGuid();
+            await AddCelestialObjectInfo(new[] { ( "Radius", "6371" ) });
             await AddDeviceInfo(guid, "Test Name", "Test Description", "Test Owner", 200);
             await AddPositionUpdate(guid, 10, 110, DateTimeOffset.Now);
             var position = new Position {
@@ -44,6 +45,7 @@ namespace WebApi.Tests.Controllers
             var serviceProvider = InjectionModule.Register(new ServiceCollection());
             var controller = serviceProvider.GetRequiredService<FindController>();
             var guid = Guid.NewGuid();
+            await AddCelestialObjectInfo(new[] { ("Radius", "6371") });
             await AddDeviceInfo(guid, "Test Name", "Test Description", "Test Owner", 200);
             await AddPositionUpdate(guid, 10, 110, DateTimeOffset.Now);
             await AddPositionUpdate(guid, 30, 130, DateTimeOffset.Now);
