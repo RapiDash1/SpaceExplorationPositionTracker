@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Tests", "WebApi.Test
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{EA159410-7EF5-4E3D-877F-19BF5F29E648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseDeployment", "DatabaseDeployment\DatabaseDeployment.csproj", "{2E798EAC-D678-4F0C-B0BF-470E5F8986E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseDeployment", "DatabaseDeployment\DatabaseDeployment.csproj", "{2E798EAC-D678-4F0C-B0BF-470E5F8986E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
