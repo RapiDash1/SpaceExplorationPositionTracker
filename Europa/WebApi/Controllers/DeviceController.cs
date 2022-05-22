@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
 using WebApi.DataAccessors;
 using WebApi.Extensions;
 using WebApi.Models;
@@ -28,7 +31,22 @@ namespace WebApi.Controllers
 
             var guid = await accessor.RegisterNewDevice(registerDevice);
 
+            AddTextToTextSearchQueue(registerDevice.Description!);
+
             return StatusCode(200, new RegisterDeviceResponse { DeviceKey = guid });
+        }
+
+        void AddTextToTextSearchQueue(string description)
+        {
+            var factory = new ConnectionFactory{ HostName = "localhost" };
+            using(var connection = factory.CreateConnection())
+            using(var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare("HubbleTextSearch", false, false, false, null);
+                var data = Encoding.UTF8.GetBytes(description);
+
+                channel.BasicPublish(exchange: string.Empty, routingKey: "HubbleTextSearch", basicProperties: null, body: data);
+            }
         }
     }
 }
